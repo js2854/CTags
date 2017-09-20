@@ -620,9 +620,11 @@ class JumpToDefinition:
         tags = {}
         for tags_file in get_alternate_tags_paths(view, tags_file):
             with TagFile(tags_file, SYMBOL) as tagfile:
-                tags = tagfile.get_tags_dict(
+                tags = tagfile.get_tags_dict_by_suffix(
                     symbol, filters=compile_filters(view))
             if tags:
+                key, value = tags.popitem()
+                tags[symbol] = value
                 break
 
         if not tags:
