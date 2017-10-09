@@ -529,7 +529,7 @@ class TagFile(object):
         :returns: matching tags
         """
         for line in self.file_o:
-            if line.split('\t')[self.column].endswith(suffix):
+            if line.split('\t')[self.column].rstrip().endswith(suffix):
                 yield Tag(line)
             else:
                 continue
